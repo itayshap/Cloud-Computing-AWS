@@ -1,6 +1,7 @@
 from flask import Flask, request
 import os
 from datetime import datetime
+import requests
 
 config = {
     "DEBUG": True  # run app in debug mode
