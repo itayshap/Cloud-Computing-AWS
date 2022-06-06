@@ -15,7 +15,7 @@ config = {
     "DEBUG": True  # run app in debug mode
 }
 
-public_ip = requests.get("http://169.254.169.254/latest/meta-data/public-ipv4").text
+public_ip = os.getenv("PUBLICID")
 
 def spawn_worker():
     ec2 = boto3.client('ec2', region_name='us-east-1')
