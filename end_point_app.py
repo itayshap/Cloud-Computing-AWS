@@ -13,9 +13,9 @@ app = Flask(__name__)
 @app.route('/enqueue', methods=['PUT'])
 def enqueue():
     iterations = int(request.args.get('iterations'))
-    work = request.data
+    work = request.get_data()
     requests.put(f"http://{public_ip}:5000/send_work?iterations={iterations}", data=work)
-    return 'work pushed to queue'
+    return f'work pushed to queue {iterations} {work}'
 
 @app.route('/pullCompleted', methods=['POST'])
 def pullCompleted():
