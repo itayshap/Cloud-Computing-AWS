@@ -112,3 +112,4 @@ def status():
 
 if __name__ == "__main__":
     threading.Thread(target=load_balancing).start()
+    app.run()
