@@ -1,5 +1,6 @@
 from flask import Flask, request
 import os
+from datetime import datetime
 
 config = {
     "DEBUG": True  # run app in debug mode
@@ -20,3 +21,8 @@ def pullCompleted():
     top = request.args.get('top')
     response = requests.post(f"http://{public_ip}/send_work", json={"top": top})
     return response.content
+
+@app.route('/', methods=['GET'])
+def status():
+    date = datetime.now()
+    return date.strftime("%d/%m/%y")
