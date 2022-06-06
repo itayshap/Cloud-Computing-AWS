@@ -87,8 +87,7 @@ scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" QM_app.
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$PUBLIC_IP <<EOF
     sudo apt update
-    sudo apt install -y python3 python3-wheel build-essential python3-dev python3-pip
-    sudo pip3 install flask boto3
+    sudo apt install -y python3-flask python3-boto3
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
     sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
@@ -127,8 +126,7 @@ scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" end_poi
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$EP1_PUBLIC_IP <<EOF
     sudo apt update
-    sudo apt install -y python3 python3-wheel build-essential python3-dev python3-pip
-    sudo pip3 install flask
+    sudo apt install -y python3-flask python3-boto3
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
     sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
@@ -163,8 +161,7 @@ scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" end_poi
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$EP2_PUBLIC_IP <<EOF
     sudo apt update
-    sudo apt install -y python3 python3-wheel build-essential python3-dev python3-pip
-    sudo pip3 install flask
+    sudo apt install -y python3-flask python3-boto3
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
     sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
