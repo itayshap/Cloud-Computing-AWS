@@ -97,11 +97,11 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     exit
 EOF
 
-echo "test that it all worked"
+echo "test that it all worked\n"
 curl  --retry-connrefused --retry 10 --retry-delay 1  http://$PUBLIC_IP:5000
 
 
-echo "Creating first Endpoint instance..."
+echo "\nCreating first Endpoint instance..."
 RUN_INSTANCES=$(aws ec2 run-instances   \
     --image-id $UBUNTU_20_04_AMI        \
     --instance-type t2.micro            \
