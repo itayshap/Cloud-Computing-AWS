@@ -19,7 +19,7 @@ def enqueue():
 @app.route('/pullCompleted', methods=['POST'])
 def pullCompleted():
     top = int(request.args.get('top'))
-    response = requests.post(f"http://{public_ip}/get_work", json={"top": top})
+    response = requests.post(f"http://{public_ip}/pullCompleted", json={"top": top})
     return response.content
 
 @app.route('/', methods=['GET'])
