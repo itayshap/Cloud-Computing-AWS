@@ -106,7 +106,7 @@ RUN_INSTANCES=$(aws ec2 run-instances   \
     --image-id $UBUNTU_20_04_AMI        \
     --instance-type t2.micro            \
     --key-name $KEY_NAME                \
-    --security-groups $SEC_GRP)
+    --security-groups $SEC_GRP_QM)
 
 
 INSTANCE_ID=$(echo $RUN_INSTANCES | jq -r '.Instances[0].InstanceId')
@@ -140,7 +140,7 @@ RUN_INSTANCES=$(aws ec2 run-instances   \
     --image-id $UBUNTU_20_04_AMI        \
     --instance-type t2.micro            \
     --key-name $KEY_NAME                \
-    --security-groups $SEC_GRP)
+    --security-groups $SEC_GRP_QM)
 
 
 INSTANCE_ID=$(echo $RUN_INSTANCES | jq -r '.Instances[0].InstanceId')
