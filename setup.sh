@@ -86,7 +86,8 @@ scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" QM_app.
 
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$PUBLIC_IP <<EOF
-    sudo apt update && sudo apt upgrade -y
+    sudo apt update
+    sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt install -y python3-flask python3-boto3
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
@@ -123,7 +124,8 @@ scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" end_poi
 
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$EP1_PUBLIC_IP <<EOF
-    sudo apt update && sudo apt upgrade -y
+    sudo apt update
+    sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt install -y python3-flask
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
@@ -156,7 +158,8 @@ scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" end_poi
 
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$EP2_PUBLIC_IP <<EOF
-    sudo apt update && sudo apt upgrade -y
+    sudo apt update
+    sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt install -y python3-flask
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
