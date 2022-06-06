@@ -84,8 +84,6 @@ echo "New instance $INSTANCE_ID @ $PUBLIC_IP"
 echo "deploying code to production"
 scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" QM_app.py ubuntu@$PUBLIC_IP:/home/ubuntu/
 
-sleep 10
-
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$PUBLIC_IP <<EOF
     sudo apt update && sudo apt upgrade -y
@@ -123,8 +121,6 @@ echo "New instance $INSTANCE_ID @ $EP1_PUBLIC_IP"
 echo "deploying code to production"
 scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" end_point_app.py ubuntu@$EP1_PUBLIC_IP:/home/ubuntu/
 
-sleep 10
-
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$EP1_PUBLIC_IP <<EOF
     sudo apt update && sudo apt upgrade -y
@@ -157,8 +153,6 @@ echo "New instance $INSTANCE_ID @ $EP2_PUBLIC_IP"
 
 echo "deploying code to production"
 scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" end_point_app.py ubuntu@$EP2_PUBLIC_IP:/home/ubuntu/
-
-sleep 10
 
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$EP2_PUBLIC_IP <<EOF
