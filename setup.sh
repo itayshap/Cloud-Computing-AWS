@@ -91,7 +91,9 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     sudo apt install python3-flask -y
     sudo apt install -y python3-boto3
     # run app
-    nohup python3 QM_app.py > output.log &
+    export PUBLICID=$PUBLIC_IP
+    export FLASK_APP=QM_app
+    nohup flask run --host 0.0.0.0  &>/dev/null &
     exit
 EOF
 
@@ -124,6 +126,7 @@ scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" end_poi
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$EP1_PUBLIC_IP <<EOF
     sudo apt update
+    sudo apt-get install python3.7
     sudo apt install python3-flask -y
     # run app
     export PUBLICID=$PUBLIC_IP
