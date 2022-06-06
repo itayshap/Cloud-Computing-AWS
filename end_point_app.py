@@ -15,7 +15,7 @@ def enqueue():
     iterations = int(request.args.get('iterations'))
     work = request.get_data()
     requests.put(f"http://{public_ip}:5000/send_work?iterations={iterations}", data=work.decode("utf-8"))
-    return f'work pushed to queue'
+    return 'work pushed to queue'
 
 @app.route('/pullCompleted', methods=['POST'])
 def pullCompleted():
