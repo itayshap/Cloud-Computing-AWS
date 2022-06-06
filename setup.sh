@@ -92,8 +92,8 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     sudo apt install -y -qq python3-flask
     python3 -m pip install boto3
     # run app
-    echo export PUBLICID=$PUBLIC_IP >> /etc/environment
-    echo export FLASK_APP=end_point_app >> /etc/environment
+    sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
+    sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
     nohup flask run --host 0.0.0.0  &>/dev/null &
     exit
 EOF
@@ -131,8 +131,8 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     sudo apt install -y -qq python3-pip
     python3 -m pip install flask
     # run app
-    echo export PUBLICID=$PUBLIC_IP >> /etc/environment
-    echo export FLASK_APP=end_point_app >> /etc/environment
+    sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
+    sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
     nohup flask run --host 0.0.0.0  &>/dev/null &
     exit
 EOF
@@ -165,8 +165,8 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     sudo apt-get install -y -qq python3
     sudo apt install -y -qq python3-flask
     # run app
-    echo export PUBLICID=$PUBLIC_IP >> /etc/environment
-    echo export FLASK_APP=end_point_app >> /etc/environment
+    sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
+    sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
     nohup flask run --host 0.0.0.0  &>/dev/null &
     exit
 EOF
