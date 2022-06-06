@@ -39,9 +39,11 @@ def spawn_worker():
         if response is None and int(time.time() - start_time) > SECONDS_TO_TERMINATE:
             break
         else:
-            buffer = response.get_data()
-            completed_work = work(buffer, 3)
-            response = requests.put("http://{public_ip}:5000/send_work", data=completed_work)
+            work_data = response.get_json()
+            iterations = work_data["iterations"]
+            buffer = work_data["work"]
+            completed_work = work(buffer, iterations)
+            response = requests.put("http://{public_ip}:5000/send_work", data=completed_work.decode("utf-8"))
             start_time = time.time()
     os.system('sudo shutdown -h now')
     EOF
@@ -102,7 +104,7 @@ def get_work():
 @app.route('/send_work', methods=['PUT'])
 def send_work():
     work = request.get_data()
-    completed_work.put(work)
+    completed_work.put(work.decode("utf-8"))
     return "work submitted"
 
 @app.route('/', methods=['GET'])
