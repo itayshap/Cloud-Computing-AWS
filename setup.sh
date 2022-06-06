@@ -91,9 +91,7 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
     sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
-    echo "exported env"
     nohup flask run --host 0.0.0.0  &>/dev/null &
-    echo "ran flask"
     exit
 EOF
 
@@ -130,9 +128,7 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
     sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
-    echo "exported env"
     nohup flask run --host 0.0.0.0  &>/dev/null &
-    echo "ran flask"
     exit
 EOF
 
@@ -165,12 +161,10 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
     sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
-    echo "exported env"
     nohup flask run --host 0.0.0.0  &>/dev/null &
-    echo "ran flask"
     exit
 EOF
 
 
-echo "Endpoint one at http://$EP1_PUBLIC_IP"
-echo "New Endpoint two at http://$EP2_PUBLIC_IP"
+echo "Endpoint one at http://$EP1_PUBLIC_IP:5000"
+echo "New Endpoint two at http://$EP2_PUBLIC_IP:5000"
