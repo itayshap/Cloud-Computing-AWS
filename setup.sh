@@ -89,7 +89,7 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     sudo apt update
     sudo apt-get install -y -qq python3
     sudo apt install -y -qq python3-pip
-    python3 -m pip install -y boto3 flask
+    python3 -m pip install boto3 flask
     # run app
     export PUBLICID=$PUBLIC_IP
     export FLASK_APP=QM_app
@@ -128,7 +128,7 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     sudo apt update
     sudo apt-get install -y -qq python3
     sudo apt install -y -qq python3-pip
-    python3 -m pip install -y flask
+    python3 -m pip install flask
     # run app
     export PUBLICID=$PUBLIC_IP
     export FLASK_APP=end_point_app
