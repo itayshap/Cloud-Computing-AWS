@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify
 import time 
 import threading
 import queue
+from datetime import datetime
 
 AUTO_SCALE_TIME = 3
 thread_lock = threading.Lock()
@@ -103,6 +104,11 @@ def send_work():
     work = request.get_json()
     completed_work.put(work)
     return "work submitted"
-    
+
+@app.route('/', methods=['GET'])
+def status():
+    date = datetime.now()
+    return date.strftime("%d/%m/%y")
+
 if __name__ == "__main__":
     threading.Thread(target=load_balancing).start()
