@@ -43,7 +43,7 @@ def spawn_worker():
             iterations = work_data["iterations"]
             buffer = work_data["work"]
             completed_work = work(buffer, iterations)
-            response = requests.put("http://{public_ip}:5000/send_work", data=completed_work)
+            response = requests.put("http://{public_ip}:5000/send_work", json={worker_id: work_data["worker_id"], work: completed_work})
             start_time = time.time()
     os.system('sudo shutdown -h now')
     EOF
@@ -103,7 +103,7 @@ def get_work():
 
 @app.route('/send_work', methods=['PUT'])
 def send_work():
-    work = request.get_data()
+    work = request.get_json()
     completed_work.put(work)
     return "work submitted"
 
