@@ -11,12 +11,12 @@ aws ec2 create-key-pair --key-name $KEY_NAME \
 # secure the key pair
 chmod 400 $KEY_PEM
 
-SEC_GRP="my-sg-`date +'%N'`"
+# SEC_GRP="my-sg-`date +'%N'`"
 
-echo "setup firewall $SEC_GRP"
-aws ec2 create-security-group   \
-    --group-name $SEC_GRP       \
-    --description "Access my instances" 
+# echo "setup firewall $SEC_GRP"
+# aws ec2 create-security-group   \
+#     --group-name $SEC_GRP       \
+#     --description "Access my instances" 
 
 # figure out my ip
 MY_IP=$(curl ipinfo.io/ip)
