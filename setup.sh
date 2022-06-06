@@ -90,7 +90,7 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     sudo apt install python3-flask -y
     sudo apt install -y python3-boto3
     # run app
-    python3 QM_app.py
+    nohup python3 QM_app.py > output.log &
     exit
 EOF
 
