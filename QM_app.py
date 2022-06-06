@@ -86,12 +86,12 @@ def enqueue():
 @app.route('/pullCompleted', methods=['POST'])
 def pullCompleted():
     top = int(request.args.get('top'))
-    completed_jobs = []
+    completed_jobs = {}
     for i in range(top):
         if completed_work.empty():
             break
-        completed_jobs.append(completed_work.get())
-    return jsonify(completed_jobs)
+        completed_jobs.update(completed_work.get())
+    return completed_jobs
 
 
 @app.route('/get_work')
