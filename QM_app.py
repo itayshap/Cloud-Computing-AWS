@@ -106,7 +106,3 @@ def send_work():
     
 if __name__ == "__main__":
     threading.Thread(target=load_balancing).start()
-    app.run(host='0.0.0.0', port=5000)
-
-# 
-# threading.Thread(target=lambda: app.run(host='0.0.0.0', port=5000, debug=False, use_reloader=True)).start()
