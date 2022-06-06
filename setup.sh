@@ -19,8 +19,8 @@ chmod 400 $KEY_PEM
 #     --description "Access my instances" 
 
 # figure out my ip
-MY_IP=$(curl ipinfo.io/ip)
-echo "My IP: $MY_IP"
+# MY_IP=$(curl ipinfo.io/ip)
+# echo "My IP: $MY_IP"
 
 
 # echo "setup rule allowing SSH access to $MY_IP only"
@@ -87,13 +87,13 @@ scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" QM_app.
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$PUBLIC_IP <<EOF
     sudo apt-get update
-    sudo apt-get install -y -qq python3
-    sudo apt-get install -y -qq python3-flask
-    sudo apt-get install -y -qq python3-boto3
+    sudo apt-get install -y -qq python3 python3-flask python3-boto3
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
     sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
+    echo "exported env"
     nohup flask run --host 0.0.0.0  &>/dev/null &
+    echo "ran flask"
     exit
 EOF
 
@@ -126,12 +126,13 @@ scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" end_poi
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$EP1_PUBLIC_IP <<EOF
     sudo apt-get update
-    sudo apt-get install -y -qq python3
-    sudo apt-get install -y -qq python3-flask
+    sudo apt-get install -y -qq python3 python3-flask
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
     sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
+    echo "exported env"
     nohup flask run --host 0.0.0.0  &>/dev/null &
+    echo "ran flask"
     exit
 EOF
 
@@ -160,12 +161,13 @@ scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" end_poi
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$EP2_PUBLIC_IP <<EOF
     sudo apt-get update
-    sudo apt-get install -y -qq python3
-    sudo apt-get install -y -qq python3-flask
+    sudo apt-get install -y -qq python3 python3-flask
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
     sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
+    echo "exported env"
     nohup flask run --host 0.0.0.0  &>/dev/null &
+    echo "ran flask"
     exit
 EOF
 
