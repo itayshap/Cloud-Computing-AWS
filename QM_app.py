@@ -73,7 +73,7 @@ app.config.from_mapping(config)
 
 @app.route('/enqueue', methods=['PUT'])
 def enqueue():
-    iterations = request.args.get('iterations')
+    iterations = int(request.args.get('iterations'))
     work = request.get_json()
     new_work = {'work_id' :work_id, 'time': time.time(), 'work': work, 'iterations' : iterations}
     work_queue.put(new_work)
@@ -83,7 +83,7 @@ def enqueue():
 
 @app.route('/pullCompleted', methods=['POST'])
 def pullCompleted():
-    top = request.args.get('top')
+    top = int(request.args.get('top'))
     completed_jobs = []
     for i in range(top):
         if completed_work.empty():
