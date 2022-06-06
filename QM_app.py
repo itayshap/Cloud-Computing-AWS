@@ -39,9 +39,9 @@ def spawn_worker():
         if response is None and int(time.time() - start_time) > SECONDS_TO_TERMINATE:
             break
         else:
-            buffer = response.json()
-            completed_work = work(buffer['1'].encode('utf-8'), 3)
-            response = requests.put("http://{public_ip}:5000/send_work", json=\u007b"completed_work": str(completed_work)\u007d)
+            buffer = response.get_data()
+            completed_work = work(buffer, 3)
+            response = requests.put("http://{public_ip}:5000/send_work", data=completed_work)
             start_time = time.time()
     os.system('sudo shutdown -h now')
     EOF
@@ -74,7 +74,7 @@ app.config.from_mapping(config)
 @app.route('/enqueue', methods=['PUT'])
 def enqueue():
     iterations = int(request.args.get('iterations'))
-    work = request.get_json()
+    work = request.get_data()
     new_work = {'work_id' :work_id, 'time': time.time(), 'work': work, 'iterations' : iterations}
     work_queue.put(new_work)
     with thread_lock:
@@ -89,7 +89,7 @@ def pullCompleted():
         if completed_work.empty():
             break
         completed_jobs.append(completed_work.get())
-    return json.dumps(completed_jobs, indent=2)
+    return jsonify(completed_jobs)
 
 
 @app.route('/get_work')
@@ -101,7 +101,7 @@ def get_work():
 
 @app.route('/send_work', methods=['PUT'])
 def send_work():
-    work = request.get_json()
+    work = request.get_data()
     completed_work.put(work)
     return "work submitted"
 
