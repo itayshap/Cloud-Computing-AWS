@@ -61,8 +61,9 @@ def load_balancing():
     while True:
         with thread_lock:
             workers = work_queue.queue
-            middle_work = workers[int(len(workers) / 2)]
-            if int(time.time() - middle_work['time']) > AUTO_SCALE_TIME:
+            if len(workers) > 0:
+                middle_work = workers[int(len(workers) / 2)]
+                if int(time.time() - middle_work['time']) > AUTO_SCALE_TIME:
                     spawn_worker()
         time.sleep(5)
 
