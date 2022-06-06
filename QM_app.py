@@ -9,8 +9,6 @@ import queue
 AUTO_SCALE_TIME = 3
 thread_lock = threading.Lock()
 work_id = 0
-worker_counter = 0
-
 
 config = {
     "DEBUG": True  # run app in debug mode
@@ -68,8 +66,7 @@ def load_balancing():
         time.sleep(5)
 
 app = Flask(__name__)
-work_queue = queue.Queue() 
-work_queue.put({'work_id' : 1, 'time': time.time(), 'work': "hello world", 'iterations' : 200})
+work_queue = queue.Queue()
 completed_work = queue.Queue() 
 app.config.from_mapping(config)
 
