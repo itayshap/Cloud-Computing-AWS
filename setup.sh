@@ -87,25 +87,7 @@ scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" QM_app.
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$PUBLIC_IP <<EOF
     sudo apt update
-    
-    for attempt in 1 2 3; do
-      if [ ! -z "`which python3-flask`" ]; then
-        break
-      fi
-      echo "Trying to install flask, attempt $attempt"
-      sudo apt-get update -yq --fix-missing
-      sudo apt-get install -yq python3-flask
-    done
-    
-    for attempt in 1 2 3; do
-      if [ ! -z "`which python3-boto3`" ]; then
-        break
-      fi
-      echo "Trying to install boto3, attempt $attempt"
-      sudo apt-get update -yq --fix-missing
-      sudo apt-get install -yq python3-boto3
-    done
-    
+    sudo apt install -y python3-flask python3-boto3
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
     sudo sh -c "echo 'export FLASK_APP=QM_app' >> /etc/environment"
@@ -142,25 +124,7 @@ scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" end_poi
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$EP1_PUBLIC_IP <<EOF
     sudo apt update
-    
-    for attempt in 1 2 3; do
-      if [ ! -z "`which python3-flask`" ]; then
-        break
-      fi
-      echo "Trying to install flask, attempt $attempt"
-      sudo apt-get update -yq --fix-missing
-      sudo apt-get install -yq python3-flask
-    done
-    
-    for attempt in 1 2 3; do
-      if [ ! -z "`which python3-boto3`" ]; then
-        break
-      fi
-      echo "Trying to install boto3, attempt $attempt"
-      sudo apt-get update -yq --fix-missing
-      sudo apt-get install -yq python3-boto3
-    done
-    
+    sudo apt install -y python3-flask
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
     sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
@@ -193,25 +157,7 @@ scp -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=60" end_poi
 echo "setup production environment"
 ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@$EP2_PUBLIC_IP <<EOF
     sudo apt update
-    
-    for attempt in 1 2 3; do
-      if [ ! -z "`which python3-flask`" ]; then
-        break
-      fi
-      echo "Trying to install flask, attempt $attempt"
-      sudo apt-get update -yq --fix-missing
-      sudo apt-get install -yq python3-flask
-    done
-    
-    for attempt in 1 2 3; do
-      if [ ! -z "`which python3-boto3`" ]; then
-        break
-      fi
-      echo "Trying to install boto3, attempt $attempt"
-      sudo apt-get update -yq --fix-missing
-      sudo apt-get install -yq python3-boto3
-    done
-    
+    sudo apt install -y python3-flask
     # run app
     sudo sh -c "echo 'export PUBLICID=$PUBLIC_IP' >> /etc/environment"
     sudo sh -c "echo 'export FLASK_APP=end_point_app' >> /etc/environment"
