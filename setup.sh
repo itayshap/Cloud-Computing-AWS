@@ -97,11 +97,11 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     exit
 EOF
 
-echo "test that it all worked\n"
+echo "test that it all worked for QM"
 curl  --retry-connrefused --retry 10 --retry-delay 1  http://$PUBLIC_IP:5000
 
 
-echo "\nCreating first Endpoint instance..."
+echo "Creating first Endpoint instance..."
 RUN_INSTANCES=$(aws ec2 run-instances   \
     --image-id $UBUNTU_20_04_AMI        \
     --instance-type t2.micro            \
@@ -135,6 +135,9 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     nohup flask run --host 0.0.0.0  &>/dev/null &
     exit
 EOF
+
+echo "test that it all worked for endpoint 1"
+curl  --retry-connrefused --retry 10 --retry-delay 1  http://$EP1_PUBLIC_IP:5000
 
 echo "Creating Second Endpoint instance..."
 RUN_INSTANCES=$(aws ec2 run-instances   \
@@ -171,6 +174,8 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
     exit
 EOF
 
+echo "test that it all worked for endpoint 2"
+curl  --retry-connrefused --retry 10 --retry-delay 1  http://$EP2_PUBLIC_IP:5000
 
 echo "Endpoint one at http://$EP1_PUBLIC_IP:5000"
 echo "New Endpoint two at http://$EP2_PUBLIC_IP:5000"
