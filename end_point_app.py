@@ -14,14 +14,14 @@ app = Flask(__name__)
 def enqueue():
     iterations = int(request.args.get('iterations'))
     work = request.get_data()
-    requests.put(f"http://{public_ip}:5000/send_work?iterations={iterations}", data=work)
+    requests.put(f"http://{public_ip}:5000/enqueue?iterations={iterations}", data=work)
     return 'work pushed to queue'
 
 @app.route('/pullCompleted', methods=['POST'])
 def pullCompleted():
     top = int(request.args.get('top'))
     response = requests.post(f"http://{public_ip}:5000/pullCompleted?top={top}")
-    return response.json
+    return response.content
 
 @app.route('/', methods=['GET'])
 def status():
