@@ -91,7 +91,7 @@ def pullCompleted():
         if completed_work.empty():
             break
         completed_jobs.update(completed_work.get())
-    return completed_jobs
+    return jsonify(completed_jobs)
 
 
 @app.route('/get_work')
