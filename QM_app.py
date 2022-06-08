@@ -42,8 +42,8 @@ def spawn_worker():
             work_data = response.get_json()
             iterations = work_data["iterations"]
             buffer = work_data["work"]
-            completed_work = work(buffer, iterations)
-            response = requests.put("http://{public_ip}:5000/send_work", json={worker_id: work_data["worker_id"], work: completed_work})
+            completed = work(buffer, iterations)
+            response = requests.put("http://{public_ip}:5000/send_work", json={"worker_id": work_data["worker_id"], "work": str(completed)})
             start_time = time.time()
     os.system('sudo shutdown -h now')
     EOF
