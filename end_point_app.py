@@ -21,7 +21,7 @@ def enqueue():
 def pullCompleted():
     top = int(request.args.get('top'))
     response = requests.post(f"http://{public_ip}:5000/pullCompleted?top={top}")
-    return response.content
+    return response.json
 
 @app.route('/', methods=['GET'])
 def status():
