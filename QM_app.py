@@ -42,17 +42,18 @@ start_time = time.time()
 while True:
     response = requests.get("http://34.228.157.101:5000/get_work")
     if response.status_code == http.HTTPStatus.NO_CONTENT:
-		if int(time.time() - start_time) > SECONDS_TO_TERMINATE:
-			break
-		else:
-			continue
+	if int(time.time() - start_time) > SECONDS_TO_TERMINATE:
+	    requests.patch("http://34.228.157.101:5000/worker_killed")
+	    break
+	else:
+	    continue
     else:
-		work_data = response.json()
-		iterations = work_data["iterations"]
-		buffer = work_data["work"].encode('utf-8')
-		completed = work(buffer, iterations)
-		response = requests.put("http://34.228.157.101:5000/send_work", data=f'{work_data["work_id"]}: {completed}')
-		start_time = time.time()
+        work_data = response.json()
+	iterations = work_data["iterations"]
+	buffer = work_data["work"].encode('utf-8')
+	completed = work(buffer, iterations)
+	response = requests.put("http://34.228.157.101:5000/send_work", data=f'{work_data["work_id"]}: {completed}')
+	start_time = time.time()
 os.system('sudo shutdown -h now')
 EOF
 
@@ -126,6 +127,12 @@ def send_work():
     with worker_counter.get_lock():
         worker_counter.value -= 1
     return "work submitted"
+
+@app.route('/worker_killed', methods=['PATCH'])
+def worker_killed():
+    with worker_counter.get_lock():
+        worker_counter.value -= 1
+    return "Message Received"
 
 @app.route('/', methods=['GET'])
 def status():
