@@ -72,7 +72,7 @@ def load_balancing():
         workers = work_queue.queue
         if len(workers) > 0:
             with worker_counter.get_lock():
-                if worker_counter >= len(workers):
+                if worker_counter.value >= len(workers):
                     sem.release()
                     time.sleep(2)
                     continue
