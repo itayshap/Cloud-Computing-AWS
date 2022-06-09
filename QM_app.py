@@ -136,8 +136,7 @@ def worker_killed():
 
 @app.route('/', methods=['GET'])
 def status():
-    date = datetime.now()
-    return date.strftime("%d/%m/%y")
+    return "QM_app is up"
 
 if __name__ == "__main__":
     threading.Thread(target=load_balancing).start()
