@@ -42,18 +42,18 @@ start_time = time.time()
 while True:
     response = requests.get("http://{public_ip}:5000/get_work")
     if response.status_code == http.HTTPStatus.NO_CONTENT:
-	if int(time.time() - start_time) > SECONDS_TO_TERMINATE:
-	    requests.patch("http://{public_ip}:5000/worker_killed")
-	    break
-	else:
-	    continue
+        if int(time.time() - start_time) > SECONDS_TO_TERMINATE:
+            requests.patch("http://{public_ip}:5000/worker_killed")
+            break
+        else:
+            continue
     else:
         work_data = response.json()
-	iterations = work_data["iterations"]
-	buffer = work_data["work"].encode('utf-8')
-	completed = work(buffer, iterations)
-	response = requests.put("http://{public_ip}:5000/send_work", data=f'{{work_data["work_id"]}}: {{completed}}')
-	start_time = time.time()
+        iterations = work_data["iterations"]
+        buffer = work_data["work"].encode('utf-8')
+        completed = work(buffer, iterations)
+        response = requests.put("http://{public_ip}:5000/send_work", data=f'{{work_data["work_id"]}}: {{completed}}')
+        start_time = time.time()
 os.system('sudo shutdown -h now')
 EOF
 
