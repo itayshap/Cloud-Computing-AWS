@@ -140,4 +140,4 @@ def status():
 
 if __name__ == "__main__":
     threading.Thread(target=load_balancing).start()
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5000)
