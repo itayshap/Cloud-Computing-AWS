@@ -25,5 +25,4 @@ def pullCompleted():
 
 @app.route('/', methods=['GET'])
 def status():
-    date = datetime.now()
-    return date.strftime("%d/%m/%y")
+    return "end_point_app is up"
