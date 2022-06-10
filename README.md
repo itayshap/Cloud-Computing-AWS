@@ -4,7 +4,7 @@
 2. Run setup.sh - At the end of the script run the url for the 2 endpoints are printed
 
 
-### Failure Guide
+              ### Failure Guide
 Here are some potential problems with our design and suggested solutions: <br/>
 
 1.	Input validations – we haven’t validated the query parameters or the body of the requests, obviously we should handle input validations in production.
