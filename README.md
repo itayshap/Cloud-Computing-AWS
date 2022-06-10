@@ -4,12 +4,12 @@
 
 Itay Shapira <br/>
 Aviv Ples
-
+ ## Running the application:
 1. Run init.sh
 2. Run setup.sh - At the end of the script run the url for the 2 endpoints are printed
 
 
-## Failure Guide
+## Failure Guide:
 Here are some potential problems with our design and suggested solutions: <br/>
 1.	Input validations – we haven’t validated the query parameters or the body of the requests, obviously we should handle input validations in production.
 2.	Our queue manager was created with access from any protocol and IP, not limited exclusively to end points – in production the access to the queue manager should be solely to the end points.
