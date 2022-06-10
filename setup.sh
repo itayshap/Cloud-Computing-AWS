@@ -11,29 +11,6 @@ aws ec2 create-key-pair --key-name $KEY_NAME \
 # secure the key pair
 chmod 400 $KEY_PEM
 
-# SEC_GRP="my-sg-`date +'%N'`"
-
-# echo "setup firewall $SEC_GRP"
-# aws ec2 create-security-group   \
-#     --group-name $SEC_GRP       \
-#     --description "Access my instances" 
-
-# figure out my ip
-# MY_IP=$(curl ipinfo.io/ip)
-# echo "My IP: $MY_IP"
-
-
-# echo "setup rule allowing SSH access to $MY_IP only"
-# aws ec2 authorize-security-group-ingress        \
-#     --group-name $SEC_GRP --port 22 --protocol tcp \
-#     --cidr $MY_IP/32
-
-# echo "setup rule allowing HTTP (port 5000) access to $MY_IP only"
-# aws ec2 authorize-security-group-ingress        \
-#     --group-name $SEC_GRP --port 5000 --protocol tcp \
-#     --cidr $MY_IP/32
-
-
 SEC_GRP_QM="myQM-sg-`date +'%N'`"
 echo "setup firewall $SEC_GRP_QM"
 aws ec2 create-security-group   \
@@ -98,7 +75,7 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
 EOF
 
 echo "test that it all worked for QM"
-curl  --retry-connrefused --retry 10 --retry-delay 1  http://$PUBLIC_IP:5000
+curl  --retry-connrefused --retry 10 --retry-delay 1  http://$PUBLIC_IP:5000 -w "\n"
 
 
 echo "Creating first Endpoint instance..."
@@ -137,7 +114,7 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
 EOF
 
 echo "test that it all worked for endpoint 1"
-curl  --retry-connrefused --retry 10 --retry-delay 1  http://$EP1_PUBLIC_IP:5000
+curl  --retry-connrefused --retry 10 --retry-delay 1  http://$EP1_PUBLIC_IP:5000 -w "\n"
 
 echo "Creating Second Endpoint instance..."
 RUN_INSTANCES=$(aws ec2 run-instances   \
@@ -175,7 +152,7 @@ ssh -i $KEY_PEM -o "StrictHostKeyChecking=no" -o "ConnectionAttempts=10" ubuntu@
 EOF
 
 echo "test that it all worked for endpoint 2"
-curl  --retry-connrefused --retry 10 --retry-delay 1  http://$EP2_PUBLIC_IP:5000
+curl  --retry-connrefused --retry 10 --retry-delay 1  http://$EP2_PUBLIC_IP:5000 -w "\n"
 
 echo "Endpoint one at http://$EP1_PUBLIC_IP:5000"
 echo "New Endpoint two at http://$EP2_PUBLIC_IP:5000"
