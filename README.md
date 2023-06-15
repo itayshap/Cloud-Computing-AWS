@@ -1,9 +1,5 @@
 # Cloud_HW2
 
-## submitted by:
-
-Itay Shapira <br/>
-Aviv Ples
  ## Running the application:
 1. Run init.sh
 2. Run setup.sh - At the end of the script, the url for the 2 endpoints will be printed 
