@@ -1,4 +1,4 @@
-# Cloud_HW2
+# Cloud Computing Home assignment 2
 
  ## Running the application:
 1. Run init.sh
